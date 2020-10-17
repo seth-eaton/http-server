@@ -87,6 +87,7 @@ int main(int argc, char **argv) {
 		snprintf((char*)buff, sizeof(buff), "HTTP/1.0 200 OK\r\n\r\n");
 		write(connfd, (char*)buff, strlen((char *)buff));
 		
+		// send file contents
 		while(1 && fPointer) {
 			memset(buff, 0, MAXLINE);
 			int n = fread(buff, 1, MAXLINE, fPointer);
@@ -102,7 +103,8 @@ int main(int argc, char **argv) {
 				break;
 			}
 		}		
-				
+		
+		// close socket
 		close(connfd);
 	}
 }	
