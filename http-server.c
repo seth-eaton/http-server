@@ -82,7 +82,6 @@ int main(int argc, char **argv) {
 		// open file
 		if ((fPointer = fopen((fileName + sizeof(char)), "r")) == NULL) {
 			fprintf(stdout, "File open error %s\n", fileName);
-			break;
 		}
 	
 		// send HTTP response
@@ -105,7 +104,6 @@ int main(int argc, char **argv) {
 				break;
 			}
 		}		
-		
 		// close socket
 		close(connfd);
 	}
