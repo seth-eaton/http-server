@@ -80,15 +80,17 @@ int main(int argc, char **argv) {
 			fileName = "/index.html";
 		
 		// open file
-		if ((fPointer = fopen((fileName + sizeof(char)), "r")) == NULL)
-			fprintf(stdout, "File open error %s\n", fileName);	
+		if ((fPointer = fopen((fileName + sizeof(char)), "r")) == NULL) {
+			fprintf(stdout, "File open error %s\n", fileName);
+			break;
+		}
 	
 		// send HTTP response
 		snprintf((char*)buff, sizeof(buff), "HTTP/1.0 200 OK\r\n\r\n");
 		write(connfd, (char*)buff, strlen((char *)buff));
 		
 		// send file contents
-		while(1 && fPointer) {
+		while(fPointer) {
 			memset(buff, 0, MAXLINE);
 			int n = fread(buff, 1, MAXLINE, fPointer);
 			
