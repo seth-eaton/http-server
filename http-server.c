@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
 	if ((listen(listenfd, 10)) < 0)
 		err_die("listen error.");
 	
-	for ( ; ; ) {
+	while (1) {
 		struct sockaddr_in addr;
 		socklen_t addr_len;
 
@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 			err_die("read error");
 
 		// compare fileName
-		if (!strcmp(fileName, "/"))
+		if (strcmp(fileName, "/") == 0)
 			fileName = "/index.html";
 		
 		// open file
